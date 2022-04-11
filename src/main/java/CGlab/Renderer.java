@@ -119,6 +119,24 @@ public class Renderer {
         return iloczyn;
     }
 
+    public void drawTriangle(Vec2f A, Vec2f B, Vec2f C) {
+        // dla każdego punktu obrazu this.render:
+        //      oblicz współrzędne baryc.
+        //      jeśli punkt leży wewnątrz, zamaluj (patrz wykład)
+
+        for(int i=0; i<h;i++){
+            for(int j=0; j<w; j++){
+                Vec2f P = new Vec2f(i,j);
+                Vec3f s = barycentric(A,B,C,P);
+
+                if(s.x > 0 && s.y > 0 && s.z > 0){
+                    drawPoint(i,j);
+                }
+
+            }
+        }
+    }
+
     public void save() throws IOException {
         File outputfile = new File(filename);
         render = Renderer.verticalFlip(render);

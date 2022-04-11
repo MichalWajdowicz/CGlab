@@ -17,14 +17,8 @@ public class App {
 
         Renderer mainRenderer = new Renderer(path, w, h, l);
         mainRenderer.clear();
-        mainRenderer.drawLine(320,240,480,480);//1
-        mainRenderer.drawLine(320,240,160,480);//2
-        mainRenderer.drawLine(320,240,0,360);//3
-        mainRenderer.drawLine(320,240,0,120);//4
-        mainRenderer.drawLine(320,240,160,0);//5
-        mainRenderer.drawLine(320,240,480,0);//6
-        mainRenderer.drawLine(320,240,639,120);//7
-        mainRenderer.drawLine(320,240,639,360);//8
+        mainRenderer.drawTriangle(new Vec2f(50,50), new Vec2f(50,100), new Vec2f(25, 50));
+
 
         try {
             mainRenderer.save();

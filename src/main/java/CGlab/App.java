@@ -13,10 +13,11 @@ public class App {
         String path = args[0];
         int w = Integer.parseInt(args[1]);
         int h = Integer.parseInt(args[2]);
+        Renderer.LineAlgo l = Renderer.LineAlgo.valueOf(args[3]);
 
-        Renderer mainRenderer = new Renderer(path, w, h);
+        Renderer mainRenderer = new Renderer(path, w, h, l);
         mainRenderer.clear();
-        mainRenderer.drawLineNaive(20,20,400,400);
+        mainRenderer.drawLine(20,20,200,300);
 
         try {
             mainRenderer.save();

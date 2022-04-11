@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import static java.lang.Math.round;
 
 public class Renderer {
 
@@ -38,7 +39,16 @@ public class Renderer {
     }
 
     public void drawLineNaive(int x0, int y0, int x1, int y1) {
-        // TODO: zaimplementuj
+        int x;
+        double dy = y1 - y0;
+        double dx = x1 - x0;
+        double m = dy / dx;
+        double y = y0;
+
+        for (x = x0; x <= x1; x++) {
+            drawPoint(x, (int) round(y));
+            y = y + m;
+        }
     }
 
     public void drawLineDDA(int x0, int y0, int x1, int y1) {

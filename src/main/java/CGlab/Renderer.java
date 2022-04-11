@@ -120,12 +120,14 @@ public class Renderer {
     }
 
     public void drawTriangle(Vec2f A, Vec2f B, Vec2f C,Vec3i rgb) {
-        // dla każdego punktu obrazu this.render:
-        //      oblicz współrzędne baryc.
-        //      jeśli punkt leży wewnątrz, zamaluj (patrz wykład)
 
-        for(int i=0; i<h;i++){
-            for(int j=0; j<w; j++){
+        float a = min(A.x, B.x, C.x);
+        float b = min(A.y, B.y, C.y);
+        float c = max(A.x, B.x, C.x);
+        float d = max(A.y, B.y, C.y);
+
+        for(float i=a; i<c;i++){
+            for(float j=a; j<c; j++){
                 Vec2f P = new Vec2f(i,j);
                 Vec3f s = barycentric(A,B,C,P);
 
@@ -167,5 +169,15 @@ public class Renderer {
         g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);
         g.dispose();
         return flippedImage;
+    }
+
+    public float min(float x, float y, float z) {
+        float min = Math.min(x, Math.min(y, z));
+        return min;
+    }
+
+    public float max(float x, float y, float z) {
+        float max = Math.max(x, Math.max(y, z));
+        return max;
     }
 }

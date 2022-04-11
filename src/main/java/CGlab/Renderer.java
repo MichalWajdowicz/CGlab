@@ -96,6 +96,29 @@ public class Renderer {
         }
     }
 
+    public Vec3f barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P) {
+        Vec3f v1 = new Vec3f(B.x - A.x, C.x - A.x, A.x - P.x);// tutaj potrzebujemy wektora składającego się ze współrzędnych
+        // x wektorów AB, AC ora PA.
+
+        Vec3f v2 = new Vec3f(B.y - A.y, C.y - A.y, A.y - P.y);
+        // tutaj potrzebujemy wektora składającego się ze współrzędnych
+        // y wektorów AB, AC ora PA.
+
+        Vec3f cross = iloczyn(v1, v2);// iloczyn wektorowy v1 i v2. Wskazówka: zaimplementuj do tego oddzielną metodę
+
+        Vec2f uv = new Vec2f(cross.x / cross.z, cross.y / cross.z);// wektor postaci: cross.x / cross.z, cross.y / cross.z
+
+        //
+        Vec3f barycentric = new Vec3f(uv.x, uv.y, 1 - uv.x - uv.y);// współrzędne barycentryczne, uv.x, uv.y, 1- uv.x - uv.y
+        return barycentric;
+    }
+
+    public Vec3f iloczyn(Vec3f v1, Vec3f v2) {
+        Vec3f iloczyn = new Vec3f(((v1.y * v2.z) - (v1.z * v2.y)), ((v1.z * v2.x) - (v1.x * v2.z)), ((v1.x * v2.y) - (v1.y * v2.x)));
+
+        return iloczyn;
+    }
+
     public void save() throws IOException {
         File outputfile = new File(filename);
         render = Renderer.verticalFlip(render);

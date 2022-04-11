@@ -119,7 +119,7 @@ public class Renderer {
         return iloczyn;
     }
 
-    public void drawTriangle(Vec2f A, Vec2f B, Vec2f C) {
+    public void drawTriangle(Vec2f A, Vec2f B, Vec2f C,Vec3i rgb) {
         // dla każdego punktu obrazu this.render:
         //      oblicz współrzędne baryc.
         //      jeśli punkt leży wewnątrz, zamaluj (patrz wykład)
@@ -130,7 +130,14 @@ public class Renderer {
                 Vec3f s = barycentric(A,B,C,P);
 
                 if(s.x > 0 && s.y > 0 && s.z > 0){
-                    drawPoint(i,j);
+                    if (rgb.x > 255)
+                        rgb.x = 255;
+                    if (rgb.y > 255)
+                        rgb.y = 255;
+                    if (rgb.z > 255)
+                        rgb.z = 255;
+                    int color = rgb.z | (rgb.y << 8) | (rgb.x << 16) | (255 << 24);
+                    render.setRGB((int) i, (int) j, color);
                 }
 
             }

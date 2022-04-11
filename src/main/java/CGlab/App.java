@@ -17,7 +17,7 @@ public class App {
 
         Renderer mainRenderer = new Renderer(path, w, h, l);
         mainRenderer.clear();
-        mainRenderer.drawTriangle(new Vec2f(50,50), new Vec2f(50,100), new Vec2f(25, 50));
+        mainRenderer.drawTriangle(new Vec2f(50,150), new Vec2f(150,54), new Vec2f(25, 50),new Vec3i(0,0,255));
 
 
         try {

@@ -77,7 +77,23 @@ public class Renderer {
     }
 
     public void drawLineBresenhamInt(int x0, int y0, int x1, int y1) {
-        // TODO: zaimplementuj
+        int white = 255 | (255 << 8) | (255 << 16) | (255 << 24);
+
+        int dx = x1-x0;
+        int dy = y1-y0;
+        int derr = Math.abs(dy/(dx));
+        int err = 0;
+
+        int y = y0;
+
+        for (int x=x0; x<=x1; x++) {
+            render.setRGB(x, y, white);
+            err += (2*derr);
+            if (err > 0.5*(2*derr)) {
+                y += (y1 > y0 ? 1 : -1);
+                err -= 1;
+            }
+        }
     }
 
     public void save() throws IOException {
